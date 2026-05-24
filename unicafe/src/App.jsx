@@ -5,9 +5,7 @@ const Header = ({text}) => <h1>{text}</h1>
 
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
-const Count = ({text, number}) => <p>{text}: {number}</p>
-
-const StatText = ({text}) => <p>{text}</p>
+const StatisticLine = ({text, number, percent}) => <p>{text}: {number} {percent ? "%" : ""}</p>
 
 const Statistics = ({good, neutral, bad}) => {
   const total = good + neutral + bad
@@ -20,13 +18,13 @@ const Statistics = ({good, neutral, bad}) => {
 
   return (
       <>
-        <Count text={'Good'} number={good} />
-        <Count text={'Neutral'} number={neutral} />
-        <Count text={'Bad'} number={bad} />
+        <StatisticLine text={'Good'} number={good} percent={false} />
+        <StatisticLine text={'Neutral'} number={neutral} percent={false}/>
+        <StatisticLine text={'Bad'} number={bad} percent={false} />
 
-        <StatText text={`Total: ${total}`} />
-        <StatText text={`Average: ${average}`} />
-        <StatText text={`Positive Percentage: ${positivePercentage}%`} />
+        <StatisticLine text={'Total: '} number={total} percent={false} />
+        <StatisticLine text={'Average: '} number={average} percent={false}/>
+        <StatisticLine text={'Positive Percentage: '} number={positivePercentage} percent={true} />
       </>
   )
 }
@@ -44,7 +42,6 @@ const App = () => {
   return (
       <div>
         <Header text={'Give Feedback'}/>
-
         <Button onClick={incrementGood} text={'Good'}></Button>
         <Button onClick={incrementNeutral} text={'Neutral'}></Button>
         <Button onClick={incrementBad} text={'Bad'}></Button>

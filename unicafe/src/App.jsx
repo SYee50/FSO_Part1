@@ -5,27 +5,32 @@ const Header = ({text}) => <h1>{text}</h1>
 
 const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
 
-const StatisticLine = ({text, number, percent}) => <p>{text}: {number} {percent ? "%" : ""}</p>
+const StatisticLine = ({text, number, percent}) => (
+    <tr>
+      <td>{text}</td>
+      <td>{number} {percent ? "%" : ""}</td>
+    </tr>
+)
 
 const Statistics = ({good, neutral, bad}) => {
   const total = good + neutral + bad
   const average = total === 0 ? 0 : (good + (bad * -1)) / total
-  const positivePercentage = total === 0 ? 0 : (good / total) * 100
+  const positive = total === 0 ? 0 : (good / total) * 100
 
   if (total === 0) {
     return <p>No Feedback Given</p>
   }
 
   return (
-      <>
-        <StatisticLine text={'Good'} number={good} percent={false} />
-        <StatisticLine text={'Neutral'} number={neutral} percent={false}/>
-        <StatisticLine text={'Bad'} number={bad} percent={false} />
+      <table>
+        <StatisticLine text={'Good '} number={good} percent={false} />
+        <StatisticLine text={'Neutral '} number={neutral} percent={false}/>
+        <StatisticLine text={'Bad '} number={bad} percent={false} />
 
-        <StatisticLine text={'Total: '} number={total} percent={false} />
-        <StatisticLine text={'Average: '} number={average} percent={false}/>
-        <StatisticLine text={'Positive Percentage: '} number={positivePercentage} percent={true} />
-      </>
+        <StatisticLine text={'Total '} number={total} percent={false} />
+        <StatisticLine text={'Average '} number={average.toFixed(1)} percent={false}/>
+        <StatisticLine text={'Positive '} number={positive.toFixed(1)} percent={true} />
+      </table>
   )
 }
 

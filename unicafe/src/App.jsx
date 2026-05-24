@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
-const Header = (props) => <h1>{props.text}</h1>
 
-const Button = (props) => <button onClick={props.onClick}>{props.text}</button>
+const Header = ({text}) => <h1>{text}</h1>
 
-const StatisticDisplay = (props) => <p>{props.text}: {props.number}</p>
+const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
+
+const StatisticDisplay = ({text, number}) => <p>{text}: {number}</p>
 
 
 const App = () => {
@@ -13,21 +14,11 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const incrementGood = () => {
-    console.log(good + 1)
-    setGood(good + 1)
-  }
+  const incrementGood = () => setGood(good + 1)
 
-  const incrementNeutral = () => {
-    console.log(neutral + 1)
-    setNeutral(neutral + 1)
-  }
+  const incrementNeutral = () => setNeutral(neutral + 1)
 
-  const incrementBad = () => {
-    console.log(bad + 1)
-    setBad(bad + 1)
-  }
-
+  const incrementBad = () => setBad(bad + 1)
 
   return (
       <div>
